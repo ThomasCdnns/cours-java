@@ -1,12 +1,66 @@
 package com.company;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        initialisationTableau();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Quel exercice ? : ");
+        int choix = scanner.nextInt();
+        System.out.println("1. Discriminant");
+        System.out.println("2. Parité d’un nombre");
+        System.out.println("3. Calcul d’extremum");
+        System.out.println("4. Égalité entre chaînes de caractères");
+        System.out.println("5. Factorielle");
+        System.out.println("6. Compte à rebours");
+        System.out.println("7. Valeurs de carrés");
+        System.out.println("8. Table de multiplication");
+        System.out.println("9. Division d’entiers");
+        System.out.println("10. Règle graduée");
+        System.out.println("11. Nombres premiers");
+        System.out.println("12. Manipulations sur un tableau");
+        switch(choix){
+            case 1:
+                discriminant();
+                break;
+            case 2:
+                parite();
+                break;
+            case 3:
+                max();
+                min();
+                break;
+            case 4:
+                egaliteStr();
+                break;
+            case 5:
+                factorielle();
+                break;
+            case 6:
+                countdown();
+                break;
+            case 7:
+                carres();
+                break;
+            case 8:
+                tableMultiplication();
+                break;
+            case 9:
+                division();
+                break;
+            case 10:
+                regle();
+                break;
+            case 11:
+                nombrePremier();
+                break;
+            case 12:
+                initialisationTableau();
+                break;
+        }
     }
 
     public static void discriminant() {
