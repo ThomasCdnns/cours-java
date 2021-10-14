@@ -25,67 +25,157 @@ class Position {
     private char column;
     private int row;
 
+    public void init(char column, int row) {
+        this.column = column;
+        this.row = row;
+    }
+
     public String toString(char column, int row) {
         return column + String.valueOf(row);
     }
 }
 
-class King extends Piece {
-
-
-}
-
-class Queen extends Piece {
-
-}
-
-class Bishop extends Piece {
-
-}
-
-class Knight extends Piece {
-
-}
-
-class Rook extends Piece {
-
-}
-
-class Pawn extends Piece {
-
-}
-
-
-
-class Piece {
+class King {
     private Position position;
     private int color;
-    private char piece;
 
-    public void init(char piece, Position position, int color){
-        this.piece = piece;
+    public void init(Position position, int color) {
         this.position = position;
         this.color = color;
     }
 
     public boolean isValidMove(Position newPosition, Cell[][] board) {
         //Générer toutes les positions possibles à partir de l'ancienne position
-
-        boolean move;
-        return move = true;
+        return false;
     }
 
     public String toString() {
-        String string;
-        return string = "test";
+        String lettre = "K";
+        return lettre;
     }
 }
 
+class Queen {
+    private Position position;
+    private int color;
+
+    public void init(Position position, int color) {
+        this.position = position;
+        this.color = color;
+    }
+
+    public boolean isValidMove(Position newPosition, Cell[][] board) {
+        //Générer toutes les positions possibles à partir de l'ancienne position
+        return false;
+    }
+
+    public String toString() {
+        String lettre = "Q";
+        return lettre;
+    }
+}
+
+class Bishop {
+    private Position position;
+    private int color;
+
+    public void init(Position position, int color) {
+        this.position = position;
+        this.color = color;
+    }
+
+    public boolean isValidMove(Position newPosition, Cell[][] board) {
+        //Générer toutes les positions possibles à partir de l'ancienne position
+        return false;
+    }
+
+    public String toString() {
+        String lettre = "B";
+        return lettre;
+    }
+}
+
+class Knight {
+    private Position position;
+    private int color;
+
+    public void init(Position position, int color) {
+        this.position = position;
+        this.color = color;
+    }
+
+    public boolean isValidMove(Position newPosition, Cell[][] board) {
+        //Générer toutes les positions possibles à partir de l'ancienne position
+        return false;
+    }
+
+    public String toString() {
+        String lettre = "N";
+        return lettre;
+    }
+}
+
+class Rook {
+    private Position position;
+    private int color;
+
+    public void init(Position position, int color) {
+        this.position = position;
+        this.color = color;
+    }
+
+    public boolean isValidMove(Position newPosition, Cell[][] board) {
+        //Générer toutes les positions possibles à partir de l'ancienne position
+        return false;
+    }
+
+    public String toString() {
+        String lettre = "R";
+        return lettre;
+    }
+}
+
+class Pawn {
+    private Position position;
+    private int color;
+
+    public void init(Position position, int color) {
+        this.position = position;
+        this.color = color;
+    }
+
+    public boolean isValidMove(Position newPosition, Cell[][] board) {
+        //Générer toutes les positions possibles à partir de l'ancienne position
+        return false;
+    }
+
+    public String toString() {
+        String lettre = "P";
+        return lettre;
+    }
+}
 
 class Cell {
     private Position position;
     private boolean isEmpty;
-    // Quelle pièce occupe cette case ?
+    private Object piece;
+
+    public void setPiece(Object piece) {
+        this.piece = piece;
+        this.isEmpty = false;
+    }
+
+    public void setEmpty() {
+        this.piece = null;
+        this.isEmpty = true;
+    }
+
+    public Object get() {
+        if (!isEmpty) {
+            return this.piece;
+        }
+        return null;
+    }
 }
 
 class Chess {
@@ -124,23 +214,77 @@ class Chess {
     }
 
     private void initialiseBoard() {
-        board = new Cell[8][8];
-        King whiteKing = new King();
-        Queen whiteQueen = new Queen();
-        Pawn white1Pawn = new Pawn();
-        Pawn white2Pawn = new Pawn();
-        Pawn white3Pawn = new Pawn();
-        Pawn white4Pawn = new Pawn();
-        Pawn white5Pawn = new Pawn();
-        Pawn white6Pawn = new Pawn();
-        Pawn white7Pawn = new Pawn();
-        Pawn white8Pawn = new Pawn();
-        Bishop white1Bishop = new Bishop();
-        Bishop white2Bishop = new Bishop();
-        Knight white1Knight = new Knight();
-        Knight white2Knight = new Knight();
-        Rook white1Rook = new Rook();
-        Rook white2Rook = new Rook();
+        board = new Cell[7][7];
+
+        King WK = new King();
+        Position positionWK = new Position();
+        positionWK.init('e', 1);
+        WK.init(positionWK, 0);
+        board[7][4].setPiece(WK);
+
+        Queen WQ = new Queen();
+        Position positionWQ = new Position();
+        positionWQ.init('d', 1);
+        WQ.init(positionWQ, 0);
+        board[7][3].setPiece(WQ);
+
+        Pawn[] WP = new Pawn[8];
+        Position[] positionWP = new Position[8];
+        char column = 'a';
+        for (int i=0; i<=7; i++){
+            positionWP[i].init(column, 2);
+            WP[i].init(positionWP[i], 0);
+            board[6][i].setPiece(WP[i]);
+            column += 1;
+        }
+
+        Bishop[] WB = new Bishop[2];
+        Position[] positionWB = new Position[2];
+
+        positionWB[0].init('c', 1);
+        WB[0].init(positionWB[0], 0);
+        board[7][2].setPiece(WB[0]);
+
+        positionWB[1].init('f', 1);
+        WB[1].init(positionWB[1], 0);
+        board[7][5].setPiece(WB[1]);
+
+
+        Queen WQ = new Queen();
+        Position positionWQ = new Position();
+        positionWQ.init('d', 1);
+        WQ.init(positionWQ, 0);
+        board[7][3].setPiece(WQ);
+
+        King WK = new King();
+        Position positionWK = new Position();
+        positionWK.init('e', 1);
+        WK.init(positionWK, 0);
+        board[7][4].setPiece(WK);
+
+        Queen WQ = new Queen();
+        Position positionWQ = new Position();
+        positionWQ.init('d', 1);
+        WQ.init(positionWQ, 0);
+        board[7][3].setPiece(WQ);
+
+        King WK = new King();
+        Position positionWK = new Position();
+        positionWK.init('e', 1);
+        WK.init(positionWK, 0);
+        board[7][4].setPiece(WK);
+
+        Queen WQ = new Queen();
+        Position positionWQ = new Position();
+        positionWQ.init('d', 1);
+        WQ.init(positionWQ, 0);
+        board[7][3].setPiece(WQ);
+
+
+        Knight WK1 = new Knight();
+        Knight WK2 = new Knight();
+        Rook WR1 = new Rook();
+        Rook WR2 = new Rook();
 
         King blackKing = new King();
         Queen blackQueen = new Queen();
@@ -158,7 +302,6 @@ class Chess {
         Knight black2Knight = new Knight();
         Rook black1Rook = new Rook();
         Rook black2Rook = new Rook();
-
 
 
     }
