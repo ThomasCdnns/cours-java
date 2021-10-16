@@ -38,24 +38,37 @@ public class Chess {
     }
 
     private void initialiseBoard() {
-        board = new Cell[7][7];
 
+        //Initialisation du plateau
+        board = new Cell[8][8];
+
+        //Initialisation de toutes les cases du plateau
+        Cell[] cell = new Cell[64];
+        char column = 'a';
+        for (int i = 0; i <= 64; i++) {
+            Position i = Position();
+            cell[i].init(position, true, null);
+        }
+
+        //Initialisation de toutes les pièces du plateau
         King WK = new King();
         Position positionWK = new Position();
         positionWK.init('e', 1);
         WK.init(positionWK, 0);
-        board[7][4].setPiece(WK);
+        board[7][4] =;
 
         Queen WQ = new Queen();
         Position positionWQ = new Position();
         positionWQ.init('d', 1);
         WQ.init(positionWQ, 0);
-        board[7][3].setPiece(WQ);
+        Cell d1 = new Cell();
+        d1.setPiece(WQ);
+        board[7][3] = d1;
 
         Pawn[] WP = new Pawn[8];
         Position[] positionWP = new Position[8];
-        char column = 'a';
-        for (int i=0; i<=7; i++){
+        column = 'a';
+        for (int i = 0; i <= 7; i++) {
             positionWP[i].init(column, 2);
             WP[i].init(positionWP[i], 0);
             board[6][i].setPiece(WP[i]);
