@@ -21,6 +21,10 @@ public class Cell {
         this.isEmpty = true;
     }
 
+    public boolean isEmpty(){
+        return this.isEmpty;
+    }
+
     public Object getPiece() {
         if (!isEmpty) {
             return this.piece;

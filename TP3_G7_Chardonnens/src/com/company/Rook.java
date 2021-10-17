@@ -13,7 +13,6 @@ public class Rook {
     }
 
     public boolean isValidMove(Position newPosition, Cell[][] board) {
-        Position currentPosition = this.position;
         ArrayList<Position> possibleMoves = new ArrayList();
 
         // Generate all possible moves from the current position
