@@ -12,6 +12,7 @@ public class Chess {
         while (true) {
             createPlayers();
             initialiseBoard();
+            printBoard();
             while (!isCheckMate()) {
                 printBoard();
                 String move;
@@ -44,15 +45,15 @@ public class Chess {
         // Initialisation de toutes les cases du plateau
         // On crée chaque case du plateau puis on lui attribue une position dans l'échiquier
         board = new Cell[8][8];
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board[i].length; j++){
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = new Cell();
             }
         }
 
         Position[][] position = new Position[8][8];
-        for(int i = 0; i < position.length; i++){
-            for(int j = 0; j < position[i].length; j++){
+        for (int i = 0; i < position.length; i++) {
+            for (int j = 0; j < position[i].length; j++) {
                 position[i][j] = new Position();
             }
         }
@@ -62,7 +63,7 @@ public class Chess {
 
         for (int i = 0; i <= 7; i++) { // Lignes de l'échiquier
             row -= i;
-             for (int j = 0; j <= 7; j++) { // Colonnes de l'échiquier
+            for (int j = 0; j <= 7; j++) { // Colonnes de l'échiquier
                 position[i][j].init(columnChar, row);
                 board[i][j].init(position[i][j], true, null);
                 columnChar += 1;
@@ -143,12 +144,13 @@ public class Chess {
         Position positionBK = new Position();
         positionBK.init('e', 1);
         BK.init(positionBK, 0);
+        board[0][4].setPiece(BK);
 
         Queen BQ = new Queen();
         Position positionBQ = new Position();
         positionBQ.init('d', 1);
         BQ.init(positionBQ, 0);
-        board[7][3].setPiece(BQ);
+        board[0][3].setPiece(BQ);
 
         Pawn[] BP = new Pawn[8];
         Position[] positionBP = new Position[8];
@@ -158,7 +160,7 @@ public class Chess {
             positionBP[i] = new Position();
             positionBP[i].init(columnChar, 2);
             BP[i].init(positionBP[i], 0);
-            board[6][i].setPiece(BP[i]);
+            board[1][i].setPiece(BP[i]);
             columnChar += 1;
         }
 
@@ -169,11 +171,11 @@ public class Chess {
 
         positionBB1.init('c', 1);
         BB1.init(positionBB1, 0);
-        board[7][2].setPiece(BB1);
+        board[0][2].setPiece(BB1);
 
         positionBB2.init('f', 1);
         BB2.init(positionBB2, 0);
-        board[7][5].setPiece(BB2);
+        board[0][5].setPiece(BB2);
 
 
         Knight BN1 = new Knight();
@@ -183,11 +185,11 @@ public class Chess {
 
         positionBN1.init('b', 1);
         BN1.init(positionBN1, 0);
-        board[7][1].setPiece(BN1);
+        board[0][1].setPiece(BN1);
 
         positionBN2.init('g', 1);
         BN2.init(positionBN2, 0);
-        board[7][6].setPiece(BN2);
+        board[0][6].setPiece(BN2);
 
         Rook BR1 = new Rook();
         Rook BR2 = new Rook();
@@ -196,20 +198,56 @@ public class Chess {
 
         positionBR1.init('a', 1);
         BR1.init(positionBR1, 0);
-        board[7][0].setPiece(BR1);
+        board[0][0].setPiece(BR1);
 
         positionBR2.init('h', 1);
         BR2.init(positionBR2, 0);
-        board[7][7].setPiece(BR2);
+        board[0][7].setPiece(BR2);
     }
 
     private void printBoard() {
-
+        char columnChar = 'a';
+        int row = 8;
+        System.out.print(" " + '\t' + "|" + '\t');
+        for (int j = 0; j <= 7; j++) {
+            System.out.print(columnChar);
+            System.out.print('\t' + "|" + '\t');
+            columnChar += 1;
+        }
+        System.out.println();
+        System.out.println();
+        for (int i = 0; i <= 7; i++) {
+            System.out.print(row);
+            System.out.print('\t' + "|" + '\t');
+            for (int j = 0; j <= 7; j++) {
+                Object piece = board[i][j].get();
+                if (piece != null) {
+                    System.out.print(piece);
+                } else {
+                    System.out.print(" ");
+                }
+                System.out.print('\t' + "|" + '\t');
+            }
+            System.out.print(row);
+            System.out.println();
+            row -= 1;
+        }
+        System.out.println();
+        columnChar = 'a';
+        System.out.print(" " + '\t' + "|" + '\t');
+        for (int j = 0; j <= 7; j++) {
+            System.out.print(columnChar);
+            System.out.print('\t' + "|" + '\t');
+            columnChar += 1;
+        }
+        System.out.println();
     }
 
     private String askMove() {
-        String test;
-        return test = "test";
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Quel est votre action ? : ");
+        String move = scanner.next();
+        return move;
     }
 
     private boolean isCheckMate() {
