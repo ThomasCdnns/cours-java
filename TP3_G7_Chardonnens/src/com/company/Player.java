@@ -8,4 +8,9 @@ public class Player {
         this.name = name;
         this.color = color;
     }
+
+    public int getColor(){
+        return this.color;
+    }
+
 }

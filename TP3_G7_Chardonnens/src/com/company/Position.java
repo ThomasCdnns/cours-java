@@ -9,6 +9,14 @@ public class Position {
         this.row = row;
     }
 
+    public char getColumn(){
+        return this.column;
+    }
+
+    public int getRow(){
+        return this.row;
+    }
+
     public String toString(char column, int row) {
         return column + String.valueOf(row);
     }

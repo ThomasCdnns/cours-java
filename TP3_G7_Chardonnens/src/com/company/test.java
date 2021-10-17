@@ -7,5 +7,6 @@ public class test {
         int result = - test1 + test2;
         System.out.println(result);
         System.out.println((int) test1);
+        System.out.println((int) test2);
     }
 }

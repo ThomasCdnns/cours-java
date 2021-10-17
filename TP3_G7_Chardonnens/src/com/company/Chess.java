@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Chess {
@@ -12,7 +11,6 @@ public class Chess {
         while (true) {
             createPlayers();
             initialiseBoard();
-            printBoard();
             while (!isCheckMate()) {
                 printBoard();
                 String move;
@@ -220,7 +218,7 @@ public class Chess {
             System.out.print(row);
             System.out.print('\t' + "|" + '\t');
             for (int j = 0; j <= 7; j++) {
-                Object piece = board[i][j].get();
+                Object piece = board[i][j].getPiece();
                 if (piece != null) {
                     System.out.print(piece);
                 } else {
@@ -251,13 +249,40 @@ public class Chess {
     }
 
     private boolean isCheckMate() {
-        boolean move;
-        return move = true;
+        return false;
     }
 
     private boolean isValidMove(String move) {
-        boolean move1;
-        return move1 = true;
+        char pieceType = move.charAt(0);
+        int column = move.charAt(1) - 97;
+        int row = 8 - move.charAt(2);
+        Position isValidPosition = new Position();
+        isValidPosition.init(move.charAt(1), move.charAt(2));
+        boolean isValid;
+
+        if (pieceType == 'K') {
+            King piece = (King) board[row][column].getPiece();
+            isValid = piece.isValidMove(isValidPosition, board);
+        } else if (pieceType == 'Q') {
+            Queen piece = (Queen) board[row][column].getPiece();
+            isValid = piece.isValidMove(isValidPosition, board);
+        } else if (pieceType == 'B') {
+            Bishop piece = (Bishop) board[row][column].getPiece();
+            isValid = piece.isValidMove(isValidPosition, board);
+        } else if (pieceType == 'N') {
+            Knight piece = (Knight) board[row][column].getPiece();
+            isValid = piece.isValidMove(isValidPosition, board);
+        } else if (pieceType == 'R') {
+            Rook piece = (Rook) board[row][column].getPiece();
+            isValid = piece.isValidMove(isValidPosition, board);
+        } else if (pieceType == 'P') {
+            Pawn piece = (Pawn) board[row][column].getPiece();
+            isValid = piece.isValidMove(isValidPosition, board);
+        } else {
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     private void updateBoard(String move) {

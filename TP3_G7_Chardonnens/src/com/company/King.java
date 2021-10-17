@@ -10,7 +10,7 @@ public class King {
     }
 
     public boolean isValidMove(Position newPosition, Cell[][] board) {
-        //Générer toutes les positions possibles à partir de l'ancienne position
+
         return false;
     }
 

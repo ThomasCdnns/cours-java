@@ -21,10 +21,14 @@ public class Cell {
         this.isEmpty = true;
     }
 
-    public Object get() {
+    public Object getPiece() {
         if (!isEmpty) {
             return this.piece;
         }
         return null;
+    }
+
+    public Position getPosition() {
+        return this.position;
     }
 }
