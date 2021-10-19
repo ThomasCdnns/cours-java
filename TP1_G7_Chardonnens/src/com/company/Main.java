@@ -19,7 +19,7 @@ public class Main {
         String name = scanner.nextLine();
         System.out.println("Bonjour,  " + name);
         //somme();
-        division();
+        volume();
     }
 
     public static void somme() {
@@ -44,5 +44,19 @@ public class Main {
         float result = premierEntier / deuxiemeEntier;
         System.out.println("La division de " + premierEntier + " avec " + deuxiemeEntier +
                 " est égale a " + result);
+    }
+
+    public static void volume() {
+        // Nous avons besoin de trois variables : L*l*h
+        // Problèmes de ce programme : les unités ne sont pas prises en compte, nombres entiers uniquement
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Veuillez saisir la largeur : ");
+        int l = scanner.nextInt();
+        System.out.println("Veuillez saisir la longueur : ");
+        int L = scanner.nextInt();
+        System.out.println("Veuillez saisie la hauteur : ");
+        int h = scanner.nextInt();
+        float result = l*L*h;
+        System.out.println("Voici le volume de ce pavé : " + result);
     }
 }
