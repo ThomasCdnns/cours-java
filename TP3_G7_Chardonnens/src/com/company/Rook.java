@@ -19,7 +19,7 @@ public class Rook {
 
         // Déplacement Vertical
         for (int row = 0; row <= board.length; row++) {
-            int columnCharToInt = this.position.getColumn();
+            int columnCharToInt = this.position.getColumn() - 97;
             possibleMoves.add(board[row][columnCharToInt].getPosition());
         }
         //Déplacement Horizontal

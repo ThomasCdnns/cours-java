@@ -17,7 +17,7 @@ public class King {
 
         // Generate all possible moves from the current position
 
-        int currentColumn = this.position.getColumn();
+        int currentColumn = this.position.getColumn() - 97;
         int currentRow = 8 - this.position.getRow();
 
         if (board[currentRow + 1][currentColumn] != null) {

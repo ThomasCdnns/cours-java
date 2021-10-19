@@ -1,11 +1,14 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Chess {
     private Cell[][] board;
-    private Player[][] players;
+    private Player[] players = new Player[2];
     private Player currentPlayer;
+    private ArrayList<Object> whitePieces = new ArrayList<>();
+    private ArrayList<Object> blackPieces = new ArrayList<>();
 
     public void play() {
         while (true) {
@@ -30,11 +33,11 @@ public class Chess {
         String nameWhite = scanner.next();
         System.out.print("Quel est le nom du joueur des pions noirs ? : ");
         String nameBlack = scanner.next();
-        Player playerWhite = new Player();
-        playerWhite.init(nameWhite, 0);
-        Player playerBlack = new Player();
-        playerBlack.init(nameBlack, 1);
-        currentPlayer = playerWhite;
+        players[0] = new Player();
+        players[0].init(nameWhite, 0);
+        players[1] = new Player();
+        players[1].init(nameBlack, 1);
+        currentPlayer = players[0];
     }
 
     private void initialiseBoard() {
@@ -244,7 +247,7 @@ public class Chess {
     private String askMove() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Quel est votre action ? : ");
-        String move = scanner.next();
+        String move = scanner.nextLine();
         return move;
     }
 
@@ -253,30 +256,36 @@ public class Chess {
     }
 
     private boolean isValidMove(String move) {
-        char pieceType = move.charAt(0);
-        int column = move.charAt(1) - 97;
-        int row = 8 - move.charAt(2);
+        String[] pieces = move.split(" ");
+        System.out.println(move);
+        String sourcePiece = pieces[0];
+        String isValidPiece = pieces[1];
+        char pieceType = sourcePiece.charAt(0);
+        int sourceColumn = sourcePiece.charAt(1) - 97;
+        int sourceRow = 8 - Integer.parseInt(String.valueOf(sourcePiece.charAt(2)));
         Position isValidPosition = new Position();
-        isValidPosition.init(move.charAt(1), move.charAt(2));
+        isValidPosition.init(isValidPiece.charAt(1), Integer.parseInt(String.valueOf(isValidPiece.charAt(2))));
+        Position sourcePosition = new Position();
+        sourcePosition.init(sourcePiece.charAt(1), Integer.parseInt(String.valueOf(sourcePiece.charAt(2))));
         boolean isValid;
 
         if (pieceType == 'K') {
-            King piece = (King) board[row][column].getPiece();
+            King piece = (King) board[sourceRow][sourceColumn].getPiece();
             isValid = piece.isValidMove(isValidPosition, board);
         } else if (pieceType == 'Q') {
-            Queen piece = (Queen) board[row][column].getPiece();
+            Queen piece = (Queen) board[sourceRow][sourceColumn].getPiece();
             isValid = piece.isValidMove(isValidPosition, board);
         } else if (pieceType == 'B') {
-            Bishop piece = (Bishop) board[row][column].getPiece();
+            Bishop piece = (Bishop) board[sourceRow][sourceColumn].getPiece();
             isValid = piece.isValidMove(isValidPosition, board);
         } else if (pieceType == 'N') {
-            Knight piece = (Knight) board[row][column].getPiece();
+            Knight piece = (Knight) board[sourceRow][sourceColumn].getPiece();
             isValid = piece.isValidMove(isValidPosition, board);
         } else if (pieceType == 'R') {
-            Rook piece = (Rook) board[row][column].getPiece();
+            Rook piece = (Rook) board[sourceRow][sourceColumn].getPiece();
             isValid = piece.isValidMove(isValidPosition, board);
         } else if (pieceType == 'P') {
-            Pawn piece = (Pawn) board[row][column].getPiece();
+            Pawn piece = (Pawn) board[sourceRow][sourceColumn].getPiece();
             isValid = piece.isValidMove(isValidPosition, board);
         } else {
             isValid = false;
@@ -286,10 +295,24 @@ public class Chess {
     }
 
     private void updateBoard(String move) {
+        String sourcePiece = move.substring(0, move.indexOf(" "));
+        String destinationPiece = move.substring(1, move.indexOf(" "));
+        int sourceColumn = sourcePiece.charAt(1) - 97;
+        int sourceRow = 8 - sourcePiece.charAt(2);
+        int destinationColumn = destinationPiece.charAt(1) - 97;
+        int destinationRow = destinationPiece.charAt(2);
 
+        board[destinationRow][destinationColumn] = null;
+        board[destinationRow][destinationColumn] = board[sourceRow][sourceColumn];
+        board[sourceRow][sourceColumn] = null;
     }
 
     private void switchPlayer() {
-
+        if (currentPlayer == players[0]){
+            currentPlayer = players[1];
+        }
+        else if (currentPlayer == players[1]){
+            currentPlayer = players[0];
+        }
     }
 }

@@ -20,7 +20,7 @@ public class Bishop {
         // Déplacement Diagonaux
         for (int i = 0; i <= board.length; i++) {
             int currentRow = 8 - this.position.getRow();
-            int currentColumn = this.position.getColumn();
+            int currentColumn = this.position.getColumn() -97;
             possibleMoves.add(board[currentRow + i][currentColumn + i].getPosition());
             possibleMoves.add(board[currentRow - i][currentColumn - i].getPosition());
             possibleMoves.add(board[currentRow + i][currentColumn - i].getPosition());
