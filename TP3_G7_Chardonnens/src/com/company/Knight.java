@@ -20,48 +20,42 @@ public class Knight {
         int currentColumn = this.position.getColumn() - 97;
         int currentRow = 8 - this.position.getRow();
 
-        if (board[currentRow + 1][currentColumn + 2] != null) {
-            possibleMoves.add(board[currentRow + 1][currentColumn].getPosition());
-        }
+        possibleMoves = tryCell(possibleMoves, board, currentRow + 1, currentColumn + 2);
+        possibleMoves = tryCell(possibleMoves, board, currentRow + 2, currentColumn + 1);
 
-        if (board[currentRow + 2][currentColumn + 1] != null) {
-            possibleMoves.add(board[currentRow][currentColumn + 1].getPosition());
-        }
+        possibleMoves = tryCell(possibleMoves, board, currentRow + 1, currentColumn - 2);
+        possibleMoves = tryCell(possibleMoves, board, currentRow + 2, currentColumn - 1);
 
-        if (board[currentRow + 1][currentColumn - 2] != null) {
-            possibleMoves.add(board[currentRow - 1][currentColumn].getPosition());
-        }
+        possibleMoves = tryCell(possibleMoves, board, currentRow - 1, currentColumn + 2);
+        possibleMoves = tryCell(possibleMoves, board, currentRow - 2, currentColumn + 1);
 
-        if (board[currentRow + 2][currentColumn - 2] != null) {
-            possibleMoves.add(board[currentRow][currentColumn - 1].getPosition());
-        }
-
-        if (board[currentRow - 1][currentColumn + 2] != null) {
-            possibleMoves.add(board[currentRow + 1][currentColumn].getPosition());
-        }
-
-        if (board[currentRow - 2][currentColumn + 1] != null) {
-            possibleMoves.add(board[currentRow][currentColumn + 1].getPosition());
-        }
-
-        if (board[currentRow - 1][currentColumn - 2] != null) {
-            possibleMoves.add(board[currentRow - 1][currentColumn].getPosition());
-        }
-
-        if (board[currentRow - 2][currentColumn - 2] != null) {
-            possibleMoves.add(board[currentRow][currentColumn - 1].getPosition());
-        }
+        possibleMoves = tryCell(possibleMoves, board, currentRow - 1, currentColumn - 2);
+        possibleMoves = tryCell(possibleMoves, board,currentRow - 2, currentColumn - 2);
 
         // Compare if the newPosition is part of all the possible moves
-        if (Arrays.asList(possibleMoves).contains(newPosition)) {
-            return true;
-        } else {
-            return false;
+        boolean isInArray = false;
+        for (Position p : possibleMoves) {
+            if (p.getString().equals(newPosition.getString())) {
+                isInArray = true;
+
+            }
         }
+        return isInArray;
     }
 
     public String toString() {
         String lettre = "N";
         return lettre;
+    }
+
+    public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
+        try {
+            boolean isEmpty = board[indexRow][indexColumn].isEmpty();
+            if (!isEmpty) {
+                possibleMoves.add(board[indexRow][indexColumn].getPosition());
+            }
+        } catch (Exception ignored) {
+        }
+        return possibleMoves;
     }
 }

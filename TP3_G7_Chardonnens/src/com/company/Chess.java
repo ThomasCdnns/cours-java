@@ -19,9 +19,8 @@ public class Chess {
                 String move;
                 do {
                     move = askMove();
-                    System.out.println(isValidMove(move));
                 }
-                while (!isValidMove(move));
+                while (!isValidMove(move) && move.length() == 7);
                 updateBoard(move);
                 printBoard();
                 switchPlayer();
@@ -248,7 +247,13 @@ public class Chess {
 
     private String askMove() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Quel est votre action ? : ");
+        String nameForQuestion = "";
+        if (currentPlayer.getColor() == 0) {
+            nameForQuestion = "joueur blanc";
+        } else {
+            nameForQuestion = "joueur noir";
+        }
+        System.out.print("Quel est votre action " + nameForQuestion + " ? : ");
         String move = scanner.nextLine();
         return move;
     }
@@ -291,7 +296,7 @@ public class Chess {
         } else {
             isValid = false;
         }
-
+        System.out.println(isValid);
         return isValid;
     }
 

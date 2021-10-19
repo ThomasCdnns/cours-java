@@ -18,27 +18,40 @@ public class Rook {
         // Generate all possible moves from the current position
 
         // Déplacement Vertical
+        int columnCharToInt = this.position.getColumn() - 97;
         for (int row = 0; row <= board.length - 1; row++) {
-            int columnCharToInt = this.position.getColumn() - 97;
-            possibleMoves.add(board[row][columnCharToInt].getPosition());
+            possibleMoves = tryCell(possibleMoves, board, row, columnCharToInt);
         }
         //Déplacement Horizontal
-        for (int column = 0; column <= board.length - 1; column++) {
-            int rowBoardToInt = 8 - this.position.getRow();
-            possibleMoves.add(board[rowBoardToInt][column].getPosition());
+        int currentRow = 8 - this.position.getRow();
+        for (int currentColumn = 0; currentColumn <= board.length - 1; currentColumn++) {
+            possibleMoves = tryCell(possibleMoves, board, currentRow, currentColumn);
         }
 
         // Compare if the newPosition is part of all the possible moves
-        if (Arrays.asList(possibleMoves).contains(newPosition)){
-            return true;
+        boolean isInArray = false;
+        for (Position p : possibleMoves) {
+            if (p.getString().equals(newPosition.getString())) {
+                isInArray = true;
+
+            }
         }
-        else {
-            return false;
-        }
+        return isInArray;
     }
 
     public String toString() {
         String lettre = "R";
         return lettre;
+    }
+
+    public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
+        try {
+            boolean isEmpty = board[indexRow][indexColumn].isEmpty();
+            if (!isEmpty) {
+                possibleMoves.add(board[indexRow][indexColumn].getPosition());
+            }
+        } catch (Exception ignored) {
+        }
+        return possibleMoves;
     }
 }

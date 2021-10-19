@@ -29,25 +29,40 @@ public class Queen {
         }
 
         // Déplacement Diagonaux x+1
+        int currentRow = 8 - this.position.getRow();
+        int currentColumn = this.position.getColumn() - 97;
+
         for (int i = 0; i <= board.length - 1; i++) {
-            int currentRow = 8 - this.position.getRow();
-            int currentColumn = this.position.getColumn() - 97;
-            possibleMoves.add(board[currentRow + i][currentColumn + i].getPosition());
-            possibleMoves.add(board[currentRow - i][currentColumn - i].getPosition());
-            possibleMoves.add(board[currentRow + i][currentColumn - i].getPosition());
-            possibleMoves.add(board[currentRow - i][currentColumn + i].getPosition());
+            possibleMoves = tryCell(possibleMoves, board, currentRow + i, currentColumn + i);
+            possibleMoves = tryCell(possibleMoves, board, currentRow - i, currentColumn + i);
+            possibleMoves = tryCell(possibleMoves, board, currentRow + i, currentColumn - i);
+            possibleMoves = tryCell(possibleMoves, board, currentRow - i, currentColumn - i);
         }
 
         // Compare if the newPosition is part of all the possible moves
-        if (Arrays.asList(possibleMoves).contains(newPosition)) {
-            return true;
-        } else {
-            return false;
+        boolean isInArray = false;
+        for (Position p : possibleMoves) {
+            if (p.getString().equals(newPosition.getString())) {
+                isInArray = true;
+
+            }
         }
+        return isInArray;
     }
 
     public String toString() {
         String lettre = "Q";
         return lettre;
+    }
+
+    public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
+        try {
+            boolean isEmpty = board[indexRow][indexColumn].isEmpty();
+            if (!isEmpty) {
+                possibleMoves.add(board[indexRow][indexColumn].getPosition());
+            }
+        } catch (Exception ignored) {
+        }
+        return possibleMoves;
     }
 }
