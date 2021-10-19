@@ -19,9 +19,11 @@ public class Chess {
                 String move;
                 do {
                     move = askMove();
+                    System.out.println(isValidMove(move));
                 }
                 while (!isValidMove(move));
                 updateBoard(move);
+                printBoard();
                 switchPlayer();
             }
         }
@@ -63,7 +65,7 @@ public class Chess {
         int row = 8;
 
         for (int i = 0; i <= 7; i++) { // Lignes de l'échiquier
-            row -= i;
+            row -= 1;
             for (int j = 0; j <= 7; j++) { // Colonnes de l'échiquier
                 position[i][j].init(columnChar, row);
                 board[i][j].init(position[i][j], true, null);
@@ -257,7 +259,6 @@ public class Chess {
 
     private boolean isValidMove(String move) {
         String[] pieces = move.split(" ");
-        System.out.println(move);
         String sourcePiece = pieces[0];
         String isValidPiece = pieces[1];
         char pieceType = sourcePiece.charAt(0);
@@ -295,23 +296,21 @@ public class Chess {
     }
 
     private void updateBoard(String move) {
-        String sourcePiece = move.substring(0, move.indexOf(" "));
-        String destinationPiece = move.substring(1, move.indexOf(" "));
+        String[] pieces = move.split(" ");
+        String sourcePiece = pieces[0];
+        String destinationPiece = pieces[1];
         int sourceColumn = sourcePiece.charAt(1) - 97;
-        int sourceRow = 8 - sourcePiece.charAt(2);
+        int sourceRow = 8 - Integer.parseInt(String.valueOf(sourcePiece.charAt(2)));
         int destinationColumn = destinationPiece.charAt(1) - 97;
-        int destinationRow = destinationPiece.charAt(2);
+        int destinationRow = 8 - Integer.parseInt(String.valueOf(destinationPiece.charAt(2)));
 
-        board[destinationRow][destinationColumn] = null;
-        board[destinationRow][destinationColumn] = board[sourceRow][sourceColumn];
-        board[sourceRow][sourceColumn] = null;
+        board[sourceRow][sourceColumn].movePiece(board[destinationRow][destinationColumn]);
     }
 
     private void switchPlayer() {
-        if (currentPlayer == players[0]){
+        if (currentPlayer == players[0]) {
             currentPlayer = players[1];
-        }
-        else if (currentPlayer == players[1]){
+        } else if (currentPlayer == players[1]) {
             currentPlayer = players[0];
         }
     }

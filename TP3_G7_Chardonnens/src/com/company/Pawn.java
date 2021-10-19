@@ -21,34 +21,45 @@ public class Pawn {
         int currentColumn = this.position.getColumn() - 97;
         int currentRow = 8 - this.position.getRow();
 
-        if (board[currentRow + 1][currentColumn].isEmpty()){
+        if (board[currentRow - 1][currentColumn].isEmpty()) {
             if (isFirstMove) {
-                possibleMoves.add(board[currentRow + 2][currentColumn].getPosition());
+                possibleMoves.add(board[currentRow - 2][currentColumn].getPosition());
             }
 
-            if (board[currentRow + 1][currentColumn] != null) {
-                possibleMoves.add(board[currentRow + 1][currentColumn].getPosition());
+            if (board[currentRow - 1][currentColumn] != null) {
+                possibleMoves.add(board[currentRow - 1][currentColumn].getPosition());
             }
         }
 
         // Déplacement Diagonaux
-        for (int i = 0; i <= board.length; i++) {
-            boolean isEmpty = board[currentRow + i][currentColumn + i].isEmpty();
-            if (!isEmpty) {
-                possibleMoves.add(board[currentRow + i][currentColumn + i].getPosition());
+        for (int i = 0; i <= board.length - 1; i++) {
+            try {
+                boolean isEmpty = board[currentRow - 1][currentColumn + 1].isEmpty();
+                if (!isEmpty) {
+                    possibleMoves.add(board[currentRow - 1][currentColumn + 1].getPosition());
+                }
+            } catch (Exception e) {
+
             }
-            isEmpty = board[currentRow + i][currentColumn - i].isEmpty();
-            if (!isEmpty) {
-                possibleMoves.add(board[currentRow + i][currentColumn - i].getPosition());
+            try {
+                boolean isEmpty = board[currentRow - 1][currentColumn - 1].isEmpty();
+                if (!isEmpty) {
+                    possibleMoves.add(board[currentRow - 1][currentColumn - 1].getPosition());
+                }
+            } catch (Exception e) {
+
             }
         }
 
         // Compare if the newPosition is part of all the possible moves
-        if (Arrays.asList(possibleMoves).contains(newPosition)) {
-            return true;
-        } else {
-            return false;
+        boolean isInArray = false;
+        for (Position p : possibleMoves) {
+            if (p.getString().equals(newPosition.getString())) {
+                isInArray = true;
+
+            }
         }
+        return isInArray;
     }
 
     public String toString() {

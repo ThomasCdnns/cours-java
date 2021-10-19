@@ -18,12 +18,12 @@ public class Rook {
         // Generate all possible moves from the current position
 
         // Déplacement Vertical
-        for (int row = 0; row <= board.length; row++) {
+        for (int row = 0; row <= board.length - 1; row++) {
             int columnCharToInt = this.position.getColumn() - 97;
             possibleMoves.add(board[row][columnCharToInt].getPosition());
         }
         //Déplacement Horizontal
-        for (int column = 0; column <= board.length; column++) {
+        for (int column = 0; column <= board.length - 1; column++) {
             int rowBoardToInt = 8 - this.position.getRow();
             possibleMoves.add(board[rowBoardToInt][column].getPosition());
         }

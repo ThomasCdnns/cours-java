@@ -18,7 +18,7 @@ public class Bishop {
         // Generate all possible moves from the current position
 
         // Déplacement Diagonaux
-        for (int i = 0; i <= board.length; i++) {
+        for (int i = 0; i <= board.length - 1; i++) {
             int currentRow = 8 - this.position.getRow();
             int currentColumn = this.position.getColumn() -97;
             possibleMoves.add(board[currentRow + i][currentColumn + i].getPosition());

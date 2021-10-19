@@ -35,4 +35,9 @@ public class Cell {
     public Position getPosition() {
         return this.position;
     }
+
+    public void movePiece(Cell destinationCell) {
+        destinationCell.setPiece(this.piece);
+        this.setEmpty();
+    }
 }

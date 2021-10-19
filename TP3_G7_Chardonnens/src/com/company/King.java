@@ -37,7 +37,7 @@ public class King {
         }
 
         // Déplacement Diagonaux
-        for (int i = 0; i <= board.length; i++) {
+        for (int i = 0; i <= board.length - 1; i++) {
             possibleMoves.add(board[currentRow + i][currentColumn + i].getPosition());
             possibleMoves.add(board[currentRow - i][currentColumn - i].getPosition());
             possibleMoves.add(board[currentRow + i][currentColumn - i].getPosition());
