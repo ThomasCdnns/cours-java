@@ -4,6 +4,7 @@ Cours de Java A1
 TP3 : 
 
 Avancée du TP, derniers résultats obtenus :
+```
 Quel est le nom du joueur des pions blancs ? : Thomas
 Quel est le nom du joueur des pions noirs ? : Nico
  	|	a	|	b	|	c	|	d	|	e	|	f	|	g	|	h	|	
@@ -122,3 +123,4 @@ Quel est votre action joueur blanc ? : Pe2 Pe3
 1	|	R	|	 	|	B	|	Q	|	 	|	B	|	N	|	R	|	1
 
  	|	a	|	b	|	c	|	d	|	e	|	f	|	g	|	h	|
+```
