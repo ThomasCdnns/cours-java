@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Pawn {
     private Position position;
@@ -29,31 +28,15 @@ public class Pawn {
 
         if (board[currentRow + colorIncrement][currentColumn].isEmpty()) {
             if (isFirstMove) {
-                possibleMoves.add(board[currentRow + (2 * colorIncrement)][currentColumn].getPosition());
+                tryCell(possibleMoves, board, currentRow + (2 * colorIncrement), currentColumn);
             }
-
-            if (board[currentRow + colorIncrement][currentColumn] != null) {
-                possibleMoves.add(board[currentRow + colorIncrement][currentColumn].getPosition());
-            }
+            tryCell(possibleMoves, board, currentRow + colorIncrement, currentColumn);
         }
 
         // Déplacement Diagonaux
         for (int i = 0; i <= board.length - 1; i++) {
-            try {
-                boolean isEmpty = board[currentRow + colorIncrement][currentColumn + 1].isEmpty();
-                if (!isEmpty) {
-                    possibleMoves.add(board[currentRow + colorIncrement][currentColumn + 1].getPosition());
-                }
-            } catch (Exception ignored) {
-            }
-            try {
-                boolean isEmpty = board[currentRow + colorIncrement][currentColumn - 1].isEmpty();
-                if (!isEmpty) {
-                    possibleMoves.add(board[currentRow + colorIncrement][currentColumn - 1].getPosition());
-                }
-            } catch (Exception ignored) {
-
-            }
+            tryCell(possibleMoves, board, currentRow + colorIncrement, currentColumn + 1);
+            tryCell(possibleMoves, board, currentRow + colorIncrement, currentColumn - 1);
         }
 
         // Compare if the newPosition is part of all the possible moves
@@ -74,9 +57,11 @@ public class Pawn {
 
     public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
         try {
-            boolean isEmpty = board[indexRow][indexColumn].isEmpty();
-            if (!isEmpty) {
-                possibleMoves.add(board[indexRow][indexColumn].getPosition());
+            if (indexRow<8 && indexRow>=0 && indexColumn<8 && indexColumn>=0){
+                boolean isEmpty = board[indexRow][indexColumn].isEmpty();
+                if (isEmpty) {
+                    possibleMoves.add(board[indexRow][indexColumn].getPosition());
+                }
             }
         } catch (Exception ignored) {
         }

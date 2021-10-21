@@ -7,8 +7,6 @@ public class Chess {
     private Cell[][] board;
     private Player[] players = new Player[2];
     private Player currentPlayer;
-    private ArrayList<Object> whitePieces = new ArrayList<>();
-    private ArrayList<Object> blackPieces = new ArrayList<>();
 
     public void play() {
         while (true) {
@@ -64,12 +62,12 @@ public class Chess {
         int row = 8;
 
         for (int i = 0; i <= 7; i++) { // Lignes de l'échiquier
-            row -= 1;
             for (int j = 0; j <= 7; j++) { // Colonnes de l'échiquier
                 position[i][j].init(columnChar, row);
                 board[i][j].init(position[i][j], true, null);
                 columnChar += 1;
             }
+            row -= 1;
             columnChar = 'a';
         }
 
@@ -144,14 +142,14 @@ public class Chess {
         //Initialisation des pièces noires
         King BK = new King();
         Position positionBK = new Position();
-        positionBK.init('e', 1);
-        BK.init(positionBK, 0);
+        positionBK.init('e', 8);
+        BK.init(positionBK, 1);
         board[0][4].setPiece(BK);
 
         Queen BQ = new Queen();
         Position positionBQ = new Position();
-        positionBQ.init('d', 1);
-        BQ.init(positionBQ, 0);
+        positionBQ.init('d', 8);
+        BQ.init(positionBQ, 1);
         board[0][3].setPiece(BQ);
 
         Pawn[] BP = new Pawn[8];
@@ -160,8 +158,8 @@ public class Chess {
         for (int i = 0; i <= 7; i++) {
             BP[i] = new Pawn();
             positionBP[i] = new Position();
-            positionBP[i].init(columnChar, 2);
-            BP[i].init(positionBP[i], 0);
+            positionBP[i].init(columnChar, 7);
+            BP[i].init(positionBP[i], 1);
             board[1][i].setPiece(BP[i]);
             columnChar += 1;
         }
@@ -171,12 +169,12 @@ public class Chess {
         Position positionBB1 = new Position();
         Position positionBB2 = new Position();
 
-        positionBB1.init('c', 1);
-        BB1.init(positionBB1, 0);
+        positionBB1.init('c', 8);
+        BB1.init(positionBB1, 1);
         board[0][2].setPiece(BB1);
 
-        positionBB2.init('f', 1);
-        BB2.init(positionBB2, 0);
+        positionBB2.init('f', 8);
+        BB2.init(positionBB2, 1);
         board[0][5].setPiece(BB2);
 
 
@@ -185,12 +183,12 @@ public class Chess {
         Position positionBN1 = new Position();
         Position positionBN2 = new Position();
 
-        positionBN1.init('b', 1);
-        BN1.init(positionBN1, 0);
+        positionBN1.init('b', 8);
+        BN1.init(positionBN1, 1);
         board[0][1].setPiece(BN1);
 
-        positionBN2.init('g', 1);
-        BN2.init(positionBN2, 0);
+        positionBN2.init('g', 8);
+        BN2.init(positionBN2, 1);
         board[0][6].setPiece(BN2);
 
         Rook BR1 = new Rook();
@@ -198,12 +196,12 @@ public class Chess {
         Position positionBR1 = new Position();
         Position positionBR2 = new Position();
 
-        positionBR1.init('a', 1);
-        BR1.init(positionBR1, 0);
+        positionBR1.init('a', 8);
+        BR1.init(positionBR1, 1);
         board[0][0].setPiece(BR1);
 
-        positionBR2.init('h', 1);
-        BR2.init(positionBR2, 0);
+        positionBR2.init('h', 8);
+        BR2.init(positionBR2, 1);
         board[0][7].setPiece(BR2);
     }
 

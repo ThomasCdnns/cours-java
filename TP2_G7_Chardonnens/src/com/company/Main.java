@@ -7,9 +7,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Quel exercice ? : ");
-        int choix = scanner.nextInt();
         System.out.println("1. Discriminant");
         System.out.println("2. Parité d’un nombre");
         System.out.println("3. Calcul d’extremum");
@@ -22,7 +19,10 @@ public class Main {
         System.out.println("10. Règle graduée");
         System.out.println("11. Nombres premiers");
         System.out.println("12. Manipulations sur un tableau");
-        switch(choix){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Quel exercice ? : ");
+        int choix = scanner.nextInt();
+        switch (choix) {
             case 1:
                 discriminant();
                 break;
@@ -74,16 +74,16 @@ public class Main {
         double delta = (Math.pow(b, 2) - 4 * a * c);
         if (delta < 0) {
             System.out.println("Ce polynome n’a pas de racine reelle, calcul de la solution complexe : ");
-            double real_part = -b / (2 * a);
-            double complex_part = Math.sqrt(-delta) / (2 * a);
-            System.out.println("La solution est : " + real_part + "+" + complex_part + "i");
+            float realPart = (float) -(b)/(a*2);
+            float complexPart = (float) Math.sqrt(-delta) / (2 * a);
+            System.out.println("Les solutions complexes sont : " + realPart + "+" + complexPart + "i et " + realPart + "-" + complexPart + "i");
         } else if (delta == 0) {
-            float result = -b / (2 * a);
+            float result = (float) -(b)/(a*2);
             System.out.println("La racine pour Delta nul est : " + result);
         } else if (delta > 0) {
-            double result_1 = (-b + Math.sqrt(delta)) / (2 * a);
-            double result_2 = (-b - Math.sqrt(delta)) / (2 * a);
-            System.out.println("Les racines pour Delta égal à " + delta + " sont : " + result_1 + " et " + result_2);
+            float result1 = (float) (-(b)+Math.sqrt(delta))/(a*2);
+            float result2 = (float) (-(b)-Math.sqrt(delta))/(a*2);
+            System.out.println("Les racines pour Delta égal à " + delta + " sont : " + result1 + " et " + result2);
         }
 
     }
@@ -272,17 +272,17 @@ public class Main {
                 indicePairs.append('\t');
             }
         }
-        System.out.println("Max : " + maxValeur + " et Min : " + minValeur + " et somme : " + somme) ;
+        System.out.println("Max : " + maxValeur + " et Min : " + minValeur + " et somme : " + somme);
         System.out.println("Elements pairs : " + pairs);
         System.out.println("Elements avec indice pair : " + indicePairs);
         System.out.println("Tableau initial : " + Arrays.toString(tableau));
         System.out.println("Tableau inverse : " + Arrays.toString(inverseTableau(tableau)));
     }
 
-    public static int[] inverseTableau(int[] tableau){
+    public static int[] inverseTableau(int[] tableau) {
         int[] newTableau = new int[tableau.length];
-        for (int i = tableau.length-1; i >= 0; i--){
-            newTableau[(tableau.length-1) - i] = tableau[i];
+        for (int i = tableau.length - 1; i >= 0; i--) {
+            newTableau[(tableau.length - 1) - i] = tableau[i];
         }
         return newTableau;
     }

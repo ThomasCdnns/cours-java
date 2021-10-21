@@ -46,9 +46,11 @@ public class Rook {
 
     public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
         try {
-            boolean isEmpty = board[indexRow][indexColumn].isEmpty();
-            if (!isEmpty) {
-                possibleMoves.add(board[indexRow][indexColumn].getPosition());
+            if (indexRow<8 && indexRow>=0 && indexColumn<8 && indexColumn>=0){
+                boolean isEmpty = board[indexRow][indexColumn].isEmpty();
+                if (isEmpty) {
+                    possibleMoves.add(board[indexRow][indexColumn].getPosition());
+                }
             }
         } catch (Exception ignored) {
         }

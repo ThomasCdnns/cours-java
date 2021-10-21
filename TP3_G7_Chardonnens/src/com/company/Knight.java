@@ -30,7 +30,7 @@ public class Knight {
         possibleMoves = tryCell(possibleMoves, board, currentRow - 2, currentColumn + 1);
 
         possibleMoves = tryCell(possibleMoves, board, currentRow - 1, currentColumn - 2);
-        possibleMoves = tryCell(possibleMoves, board,currentRow - 2, currentColumn - 2);
+        possibleMoves = tryCell(possibleMoves, board,currentRow - 2, currentColumn - 1);
 
         // Compare if the newPosition is part of all the possible moves
         boolean isInArray = false;
@@ -50,9 +50,11 @@ public class Knight {
 
     public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
         try {
-            boolean isEmpty = board[indexRow][indexColumn].isEmpty();
-            if (!isEmpty) {
-                possibleMoves.add(board[indexRow][indexColumn].getPosition());
+            if (indexRow<8 && indexRow>=0 && indexColumn<8 && indexColumn>=0){
+                boolean isEmpty = board[indexRow][indexColumn].isEmpty();
+                if (isEmpty) {
+                    possibleMoves.add(board[indexRow][indexColumn].getPosition());
+                }
             }
         } catch (Exception ignored) {
         }
