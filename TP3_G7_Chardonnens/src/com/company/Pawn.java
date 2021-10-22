@@ -12,6 +12,10 @@ public class Pawn {
         this.color = color;
     }
 
+    public int getColor() {
+        return this.color;
+    }
+
     public boolean isValidMove(Position newPosition, Cell[][] board) {
         ArrayList<Position> possibleMoves = new ArrayList();
 
@@ -42,7 +46,6 @@ public class Pawn {
         // Compare if the newPosition is part of all the possible moves
         boolean isInArray = false;
         for (Position p : possibleMoves) {
-            System.out.println(p.getString());
             if (p.getString().equals(newPosition.getString())) {
                 isInArray = true;
             }

@@ -12,6 +12,10 @@ public class Bishop {
         this.color = color;
     }
 
+    public int getColor() {
+        return this.color;
+    }
+
     public boolean isValidMove(Position newPosition, Cell[][] board) {
         ArrayList<Position> possibleMoves = new ArrayList();
 

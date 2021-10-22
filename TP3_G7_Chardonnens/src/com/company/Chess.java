@@ -20,7 +20,6 @@ public class Chess {
                 }
                 while (!isValidMove(move) && move.length() == 7);
                 updateBoard(move);
-                printBoard();
                 switchPlayer();
             }
         }
@@ -245,13 +244,7 @@ public class Chess {
 
     private String askMove() {
         Scanner scanner = new Scanner(System.in);
-        String nameForQuestion = "";
-        if (currentPlayer.getColor() == 0) {
-            nameForQuestion = "joueur blanc";
-        } else {
-            nameForQuestion = "joueur noir";
-        }
-        System.out.print("Quel est votre action " + nameForQuestion + " ? : ");
+        System.out.print("Quel est votre action " + currentPlayer.getName() + " ? : ");
         String move = scanner.nextLine();
         return move;
     }
@@ -271,30 +264,41 @@ public class Chess {
         isValidPosition.init(isValidPiece.charAt(1), Integer.parseInt(String.valueOf(isValidPiece.charAt(2))));
         Position sourcePosition = new Position();
         sourcePosition.init(sourcePiece.charAt(1), Integer.parseInt(String.valueOf(sourcePiece.charAt(2))));
-        boolean isValid;
+        boolean isValid = false;
 
         if (pieceType == 'K') {
             King piece = (King) board[sourceRow][sourceColumn].getPiece();
-            isValid = piece.isValidMove(isValidPosition, board);
+            if (currentPlayer.getColor() == piece.getColor()){
+                isValid = piece.isValidMove(isValidPosition, board);
+            }
         } else if (pieceType == 'Q') {
             Queen piece = (Queen) board[sourceRow][sourceColumn].getPiece();
-            isValid = piece.isValidMove(isValidPosition, board);
+            if (currentPlayer.getColor() == piece.getColor()){
+                isValid = piece.isValidMove(isValidPosition, board);
+            }
         } else if (pieceType == 'B') {
             Bishop piece = (Bishop) board[sourceRow][sourceColumn].getPiece();
-            isValid = piece.isValidMove(isValidPosition, board);
+            if (currentPlayer.getColor() == piece.getColor()){
+                isValid = piece.isValidMove(isValidPosition, board);
+            }
         } else if (pieceType == 'N') {
             Knight piece = (Knight) board[sourceRow][sourceColumn].getPiece();
-            isValid = piece.isValidMove(isValidPosition, board);
+            if (currentPlayer.getColor() == piece.getColor()){
+                isValid = piece.isValidMove(isValidPosition, board);
+            }
         } else if (pieceType == 'R') {
             Rook piece = (Rook) board[sourceRow][sourceColumn].getPiece();
-            isValid = piece.isValidMove(isValidPosition, board);
+            if (currentPlayer.getColor() == piece.getColor()){
+                isValid = piece.isValidMove(isValidPosition, board);
+            }
         } else if (pieceType == 'P') {
             Pawn piece = (Pawn) board[sourceRow][sourceColumn].getPiece();
-            isValid = piece.isValidMove(isValidPosition, board);
-        } else {
-            isValid = false;
+            if (currentPlayer.getColor() == piece.getColor()){
+                isValid = piece.isValidMove(isValidPosition, board);
+            }
         }
-        System.out.println(isValid);
+
+        System.out.println("Ordinateur, ce coup est-il bon ? : " + isValid);
         return isValid;
     }
 
