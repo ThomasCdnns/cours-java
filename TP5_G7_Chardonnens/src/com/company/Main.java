@@ -78,10 +78,10 @@ public class Main {
         System.out.println("Debut du tri");
         int tmp = 0;
         for (int i = 0; i < tableau.length; i++) {
-            for (int j = 1; j < (tableau.length - 1); j++){
-                if(tableau[j-1] > tableau[j]){
-                    tmp = tableau[j-1];
-                    tableau[j-1] = tableau[j];
+            for (int j = 1; j < (tableau.length - 1); j++) {
+                if (tableau[j - 1] > tableau[j]) {
+                    tmp = tableau[j - 1];
+                    tableau[j - 1] = tableau[j];
                     tableau[j] = tmp;
                 }
             }
@@ -90,5 +90,34 @@ public class Main {
         long duration = Duration.between(start, end).toSeconds();
         System.out.println("Le tri à bulles a pris " + duration + " s");
     }
+
+    public static void quicksort(int[] tableau, int indGauche, int indDroite) {
+        if (indGauche < indDroite) {
+            int partitionIndex = partition(tableau, indGauche, indDroite);
+            quicksort(tableau, indGauche, partitionIndex - 1);
+            quicksort(tableau, partitionIndex + 1, indDroite);
+        }
+    }
+
+    public static int partition(int[] tableau, int indGauche, int indDroite) {
+        int pivot = tableau[indDroite];
+        int i = (indGauche - 1);
+
+        for (int j = indGauche; j < indDroite; j++) {
+            if (tableau[j] <= pivot) {
+                i++;
+                int swapTemp = tableau[i];
+                tableau[i] = tableau[j];
+                tableau[j] = swapTemp;
+            }
+        }
+
+        int swapTemp = tableau[i+1];
+        tableau[i+1] = tableau[indDroite];
+        tableau[indDroite] = swapTemp;
+
+        return i+1;
+    }
+
 
 }
