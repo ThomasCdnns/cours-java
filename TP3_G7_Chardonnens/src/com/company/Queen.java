@@ -49,7 +49,6 @@ public class Queen {
         for (Position p : possibleMoves) {
             if (p.getString().equals(newPosition.getString())) {
                 isInArray = true;
-
             }
         }
         return isInArray;
