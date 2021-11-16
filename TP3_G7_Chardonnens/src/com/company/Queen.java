@@ -1,41 +1,34 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Queen {
-    private Position position;
-    private int color;
+public class Queen extends Piece {
 
-    public void init(Position position, int color) {
-        this.position = position;
-        this.color = color;
+    public String toString() {
+        String lettre = "Q";
+        return lettre;
     }
 
-
-    public int getColor() {
-        return this.color;
-    }
-
+    @Override
     public boolean isValidMove(Position newPosition, Cell[][] board) {
         ArrayList<Position> possibleMoves = new ArrayList();
 
         // Generate all possible moves from the current position
 
         // Déplacement Vertical
+        int currentColumn = this.position.getColumn() - 97;
         for (int row = 0; row <= board.length - 1; row++) {
-            int columnCharToInt = this.position.getColumn();
-            possibleMoves.add(board[row][columnCharToInt].getPosition());
+            possibleMoves = tryCell(possibleMoves, board, row, currentColumn);
         }
         //Déplacement Horizontal
-        for (int column = 0; column <= board.length - 1; column++) {
-            int rowBoardToInt = 8 - this.position.getRow();
-            possibleMoves.add(board[rowBoardToInt][column].getPosition());
+        int currentRow = 8 - this.position.getRow();
+        for (currentColumn = 0; currentColumn <= board.length - 1; currentColumn++) {
+            possibleMoves = tryCell(possibleMoves, board, currentRow, currentColumn);
         }
 
         // Déplacement Diagonaux x+1
-        int currentRow = 8 - this.position.getRow();
-        int currentColumn = this.position.getColumn() - 97;
+        currentRow = 8 - this.position.getRow();
+        currentColumn = this.position.getColumn() - 97;
 
         for (int i = 0; i <= board.length - 1; i++) {
             possibleMoves = tryCell(possibleMoves, board, currentRow + i, currentColumn + i);
@@ -52,23 +45,5 @@ public class Queen {
             }
         }
         return isInArray;
-    }
-
-    public String toString() {
-        String lettre = "Q";
-        return lettre;
-    }
-
-    public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
-        try {
-            if (indexRow < 8 && indexRow >= 0 && indexColumn < 8 && indexColumn >= 0) {
-                boolean isEmpty = board[indexRow][indexColumn].isEmpty();
-                if (isEmpty) {
-                    possibleMoves.add(board[indexRow][indexColumn].getPosition());
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        return possibleMoves;
     }
 }

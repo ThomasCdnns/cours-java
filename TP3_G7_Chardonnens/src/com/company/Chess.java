@@ -257,7 +257,6 @@ public class Chess {
         String[] pieces = move.split(" ");
         String sourcePiece = pieces[0];
         String isValidPiece = pieces[1];
-        char pieceType = sourcePiece.charAt(0);
         int sourceColumn = sourcePiece.charAt(1) - 97;
         int sourceRow = 8 - Integer.parseInt(String.valueOf(sourcePiece.charAt(2)));
         Position isValidPosition = new Position();
@@ -266,36 +265,8 @@ public class Chess {
         sourcePosition.init(sourcePiece.charAt(1), Integer.parseInt(String.valueOf(sourcePiece.charAt(2))));
         boolean isValid = false;
 
-        if (pieceType == 'K') {
-            King piece = (King) board[sourceRow][sourceColumn].getPiece();
-            if (currentPlayer.getColor() == piece.getColor()){
-                isValid = piece.isValidMove(isValidPosition, board);
-            }
-        } else if (pieceType == 'Q') {
-            Queen piece = (Queen) board[sourceRow][sourceColumn].getPiece();
-            if (currentPlayer.getColor() == piece.getColor()){
-                isValid = piece.isValidMove(isValidPosition, board);
-            }
-        } else if (pieceType == 'B') {
-            Bishop piece = (Bishop) board[sourceRow][sourceColumn].getPiece();
-            if (currentPlayer.getColor() == piece.getColor()){
-                isValid = piece.isValidMove(isValidPosition, board);
-            }
-        } else if (pieceType == 'N') {
-            Knight piece = (Knight) board[sourceRow][sourceColumn].getPiece();
-            if (currentPlayer.getColor() == piece.getColor()){
-                isValid = piece.isValidMove(isValidPosition, board);
-            }
-        } else if (pieceType == 'R') {
-            Rook piece = (Rook) board[sourceRow][sourceColumn].getPiece();
-            if (currentPlayer.getColor() == piece.getColor()){
-                isValid = piece.isValidMove(isValidPosition, board);
-            }
-        } else if (pieceType == 'P') {
-            Pawn piece = (Pawn) board[sourceRow][sourceColumn].getPiece();
-            if (currentPlayer.getColor() == piece.getColor()){
-                isValid = piece.isValidMove(isValidPosition, board);
-            }
+        if (currentPlayer.getColor() == board[sourceRow][sourceColumn].getPiece().getColor()){
+            isValid = board[sourceRow][sourceColumn].getPiece().isValidMove(isValidPosition, board);
         }
 
         System.out.println("Ordinateur, ce coup est-il bon ? : " + isValid);

@@ -2,20 +2,15 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Pawn {
-    private Position position;
-    private int color;
+public class Pawn extends Piece {
     private boolean isFirstMove = true;
 
-    public void init(Position position, int color) {
-        this.position = position;
-        this.color = color;
+    public String toString() {
+        String lettre = "P";
+        return lettre;
     }
 
-    public int getColor() {
-        return this.color;
-    }
-
+    @Override
     public boolean isValidMove(Position newPosition, Cell[][] board) {
         ArrayList<Position> possibleMoves = new ArrayList();
 
@@ -53,21 +48,4 @@ public class Pawn {
         return isInArray;
     }
 
-    public String toString() {
-        String lettre = "P";
-        return lettre;
-    }
-
-    public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
-        try {
-            if (indexRow<8 && indexRow>=0 && indexColumn<8 && indexColumn>=0){
-                boolean isEmpty = board[indexRow][indexColumn].isEmpty();
-                if (isEmpty) {
-                    possibleMoves.add(board[indexRow][indexColumn].getPosition());
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        return possibleMoves;
-    }
 }

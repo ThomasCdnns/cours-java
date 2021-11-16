@@ -3,15 +3,15 @@ package com.company;
 public class Cell {
     private Position position;
     private boolean isEmpty;
-    private Object piece;
+    private Piece piece;
 
-    public void init(Position position, boolean isEmpty, Object piece) {
+    public void init(Position position, boolean isEmpty, Piece piece) {
         this.position = position;
         this.isEmpty = isEmpty;
         this.piece = piece;
     }
 
-    public void setPiece(Object piece) {
+    public void setPiece(Piece piece) {
         this.piece = piece;
         this.isEmpty = false;
     }
@@ -25,7 +25,7 @@ public class Cell {
         return this.isEmpty;
     }
 
-    public Object getPiece() {
+    public Piece getPiece() {
         if (!isEmpty) {
             return this.piece;
         }
