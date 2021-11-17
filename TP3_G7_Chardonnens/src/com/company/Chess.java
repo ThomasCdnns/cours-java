@@ -1,12 +1,14 @@
 package com.company;
 
-import java.util.ArrayList;
+import java.util.regex.*;
 import java.util.Scanner;
 
 public class Chess {
     private Cell[][] board;
     private Player[] players = new Player[2];
     private Player currentPlayer;
+    private static Pattern pattern;
+    private static Matcher matcher;
 
     public void play() {
         while (true) {
@@ -27,9 +29,9 @@ public class Chess {
 
     private void createPlayers() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Quel est le nom du joueur des pions blancs ? : ");
+        System.out.print("Quel est le nom du joueur des pions rouges (blancs) ? : ");
         String nameWhite = scanner.next();
-        System.out.print("Quel est le nom du joueur des pions noirs ? : ");
+        System.out.print("Quel est le nom du joueur des pions bleus (noirs) ? : ");
         String nameBlack = scanner.next();
         players[0] = new Player();
         players[0].init(nameWhite, 0);
@@ -219,9 +221,15 @@ public class Chess {
             System.out.print(row);
             System.out.print('\t' + "|" + '\t');
             for (int j = 0; j <= 7; j++) {
-                Object piece = board[i][j].getPiece();
+                Piece piece = board[i][j].getPiece();
                 if (piece != null) {
-                    System.out.print(piece);
+                    if (piece.getColor() == 0) {
+                        System.out.print(ConsoleColors.RED + piece + ConsoleColors.RESET);
+                    }
+                    else if (piece.getColor() == 1) {
+                        System.out.print(ConsoleColors.BLUE + piece + ConsoleColors.RESET);
+                    }
+
                 } else {
                     System.out.print(" ");
                 }
@@ -244,8 +252,15 @@ public class Chess {
 
     private String askMove() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Quel est votre action " + currentPlayer.getName() + " ? : ");
-        String move = scanner.nextLine();
+        String move = null;
+        // Regex pour identifier si la syntaxe de l'input est correcte du format "LettreLettreChiffre Espace LettreLettreChiffre"
+        pattern = Pattern.compile("\\w\\w\\d\\s\\w\\w\\d");
+        do {
+            System.out.print("Quel est votre action " + currentPlayer.getName() + " ? : ");
+            move = scanner.nextLine();
+            matcher = pattern.matcher(move);
+        } while (!matcher.find());
+
         return move;
     }
 
@@ -265,7 +280,7 @@ public class Chess {
         sourcePosition.init(sourcePiece.charAt(1), Integer.parseInt(String.valueOf(sourcePiece.charAt(2))));
         boolean isValid = false;
 
-        if (currentPlayer.getColor() == board[sourceRow][sourceColumn].getPiece().getColor()){
+        if (currentPlayer.getColor() == board[sourceRow][sourceColumn].getPiece().getColor()) {
             isValid = board[sourceRow][sourceColumn].getPiece().isValidMove(isValidPosition, board);
         }
 
