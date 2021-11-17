@@ -15,6 +15,10 @@ public class Piece {
         return this.color;
     }
 
+    public void setPosition(Position newPosition){
+        this.position = newPosition;
+    }
+
     public ArrayList<Position> tryCell(ArrayList<Position> possibleMoves, Cell[][] board, int indexRow, int indexColumn) {
         try {
             if (indexRow<8 && indexRow>=0 && indexColumn<8 && indexColumn>=0){
@@ -23,9 +27,6 @@ public class Piece {
                 if (isEmpty) {
                     possibleMoves.add(board[indexRow][indexColumn].getPosition());
                 }
-
-                //Même couleur de pièce
-                else if (board[indexRow][indexColumn].getPiece().getColor() == color){}
 
                 //Pièce adverse
                 else if (board[indexRow][indexColumn].getPiece().getColor() != color){

@@ -109,7 +109,7 @@ public class Chess {
         board[7][2].setPiece(WB1);
 
         positionWB2.init('f', 1);
-        WB1.init(positionWB2, 0);
+        WB2.init(positionWB2, 0);
         board[7][5].setPiece(WB2);
 
 
@@ -265,6 +265,8 @@ public class Chess {
     }
 
     private boolean isCheckMate() {
+
+
         return false;
     }
 

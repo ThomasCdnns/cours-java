@@ -26,16 +26,23 @@ public class Pawn extends Piece {
         }
 
         if (board[currentRow + colorIncrement][currentColumn].isEmpty()) {
+            possibleMoves = tryCell(possibleMoves, board, currentRow + colorIncrement, currentColumn);
             if (isFirstMove) {
-                tryCell(possibleMoves, board, currentRow + (2 * colorIncrement), currentColumn);
+                possibleMoves = tryCell(possibleMoves, board, currentRow + (2 * colorIncrement), currentColumn);
             }
-            tryCell(possibleMoves, board, currentRow + colorIncrement, currentColumn);
         }
 
-        // Déplacement Diagonaux
-        for (int i = 0; i <= board.length - 1; i++) {
-            tryCell(possibleMoves, board, currentRow + colorIncrement, currentColumn + 1);
-            tryCell(possibleMoves, board, currentRow + colorIncrement, currentColumn - 1);
+        // Déplacement Diagonaux seulement si c'est un adversaire
+        if (!board[currentRow + colorIncrement][currentColumn + 1].isEmpty()) {
+            if (board[currentRow + colorIncrement][currentColumn + 1].getPiece().getColor() != color){
+                possibleMoves.add(board[currentRow + colorIncrement][currentColumn + 1].getPosition());
+            }
+        }
+
+        if (!board[currentRow + colorIncrement][currentColumn - 1].isEmpty()) {
+            if (board[currentRow + colorIncrement][currentColumn - 1].getPiece().getColor() != color){
+                possibleMoves.add(board[currentRow + colorIncrement][currentColumn - 1].getPosition());
+            }
         }
 
         // Compare if the newPosition is part of all the possible moves

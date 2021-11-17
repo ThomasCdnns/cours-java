@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Bishop extends Piece{
+public class Bishop extends Piece {
 
     public String toString() {
         String lettre = "B";
@@ -16,12 +16,15 @@ public class Bishop extends Piece{
         // Generate all possible moves from the current position
         int currentRow = 8 - this.position.getRow();
         int currentColumn = this.position.getColumn() - 97;
-        // Déplacement Diagonaux
+        // Déplacements Diagonaux
+
+        // Faire une fonction récursive plutot qu'une boucle for.
         for (int i = 0; i <= board.length - 1; i++) {
             possibleMoves = tryCell(possibleMoves, board, currentRow + i, currentColumn + i);
             possibleMoves = tryCell(possibleMoves, board, currentRow - i, currentColumn + i);
             possibleMoves = tryCell(possibleMoves, board, currentRow + i, currentColumn - i);
             possibleMoves = tryCell(possibleMoves, board, currentRow - i, currentColumn - i);
+
         }
 
         // Compare if the newPosition is part of all the possible moves
