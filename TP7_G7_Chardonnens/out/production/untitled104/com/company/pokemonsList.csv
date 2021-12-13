@@ -1,0 +1,11 @@
+name,type,maxPV,attack0,damage0,attack1,damage1,attack2,damage2,attack3,damage3
+TIPLOUF,WATER,53,Pound,40,WaterGun,40,Peck,35,BubbleBeam,65
+OUISTICRAM,FIRE,44,Scratch,40,Ember,40,PowerUpPunch,40,FurySwipes,18
+TORTIPOUSS,PLANT,55,Tackle,40,Leafage,40,RazorLeaf,55,Bite,60
+ARCKO,PLANT,40,Pound,40,Leafage,40,QuickAttack,40,MegaDrain,40
+POUSSIFEU,FIRE,45,Scratch,40,Ember,40,QuickAttack,40,FlameCharge,50
+GOBOU,WATER,50,Tackle,40,WaterGun,40,RockSmash,40,RockThrow,50
+BULBIZARRE,PLANT,45,Tackle,40,VineWhip,45,RazorLeaf,55,SeedBomb,80
+SALAMECHE,FIRE,39,Scratch,40,Ember,40,DragonBreath,60,FireFang,65
+CARAPUCE,WATER,44,Tackle,40,WaterGun,40,RapidSpin,50,Bite,60
+LUXIO,ELECTRICITY,80,VoltSwitch,70,Crunch,80,Discharge,80,WildCharge,90
