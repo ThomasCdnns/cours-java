@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
-    private final String name = "Alex";
+    private String name;
     private ArrayList<Pokemon> pokemonsTravel = new ArrayList<>(6);
     private ArrayList<Pokemon> pokemonsCenter = new ArrayList<>();
 
@@ -12,7 +12,17 @@ public class Player {
         return name;
     }
 
-    public void setpokemonsTravel(Pokemon newPokemon) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void pokemonUpdate(Pokemon pokemon, int indexInList){
+        pokemonsTravel.remove(indexInList);
+        pokemonsTravel.add(indexInList, pokemon);
+    }
+
+    public void setPokemonsTravel(Pokemon newPokemon) {
+        //newPokemon.askNickname();
         if (this.pokemonsTravel.size() == 6){
             Scanner sc = new Scanner(System.in);
             System.out.println("Whick pokemon do you want to put in the healing center?");
@@ -24,10 +34,9 @@ public class Player {
             int saisie;
             do{
                 saisie = sc.nextInt();
-            }while(saisie>i);
+            }while(saisie>=i);
             pokemonsCenter.add(pokemonsTravel.get(saisie));
-            pokemonsTravel.remove(saisie);
-            pokemonsTravel.add(i, newPokemon);
+            pokemonsTravel.set(saisie, newPokemon);
         }
         else {
             pokemonsTravel.add(newPokemon);
@@ -35,7 +44,7 @@ public class Player {
         System.out.println("New pokemon added to the pokedex: " + newPokemon.getName() + " !");
     }
 
-    public ArrayList<Pokemon> getpokemonsTravel() {
+    public ArrayList<Pokemon> getPokemonsTravel() {
         return pokemonsTravel;
     }
 

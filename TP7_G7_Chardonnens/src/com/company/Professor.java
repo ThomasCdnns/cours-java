@@ -11,7 +11,7 @@ public class Professor {
         this.professorName = professorName;
     }
 
-    public Pokemon choosePokemon(ArrayList<String> pokemonList){
+    public Pokemon choosePokemon(ArrayList<Pokemon> pokemonList){
         int sizePokemonSet = pokemonList.size();
         int randomRemoval = ThreadLocalRandom.current().nextInt(0, sizePokemonSet);
         pokemonList.remove(randomRemoval);
@@ -19,11 +19,10 @@ public class Professor {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome young trainer! Which Pokemon do you want to choose?");
         for (int i=0; i < sizePokemonSet; i++){
-            System.out.println(i + ": " + pokemonList.get(i));
+            System.out.println(i + ": " + pokemonList.get(i).getName());
         }
         int saisie = sc.nextInt();
-        Pokemon pokemon = new Pokemon();
-        pokemon.setName(pokemonList.get(saisie));
+        Pokemon pokemon = pokemonList.get(saisie);
         System.out.println("You chose this pokemon: " + pokemonList.get(saisie));
         return pokemon;
     }

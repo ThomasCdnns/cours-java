@@ -33,6 +33,13 @@ public class Pokemon {
         return nickname;
     }
 
+    public void askNickname(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What nickname do you want to give to "+ name +"?");
+        String saisie = sc.nextLine();
+        setNickname(saisie);
+    }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -49,6 +56,10 @@ public class Pokemon {
         return maxPV;
     }
 
+    public void initCurrentPV(){
+        this.currentPV = maxPV;
+    }
+
     public void setCurrentPV(int currentPV) {
         this.currentPV = currentPV;
     }
@@ -57,13 +68,37 @@ public class Pokemon {
         return currentPV;
     }
 
+    public int askAttack(){
+        int value = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Whick attack do you choose?");
+        int i = 0;
+        for (String key : this.attacks.keySet()){
+            System.out.println(i + ": " + key + " — Damage: " + this.attacks.get(key));
+            i+=1;
+        }
+        int saisie;
+        do{
+            saisie = sc.nextInt();
+        }while(saisie>i);
+        i=0;
+        for (String key : this.attacks.keySet()){
+            if (i==saisie){
+                value = this.attacks.get(key);
+                break;
+            }
+            i++;
+        }
+        return value;
+    }
+
     public void setAttack(String attack, int damages) {
         if (this.attacks.size() == 4){
             Scanner sc = new Scanner(System.in);
             System.out.println("Whick attack do you want to replace by the new one?");
             int i = 0;
             for (String key : this.attacks.keySet()){
-                System.out.println(i + ": " + key);
+                System.out.println(i + ": " + key + " — Damages: " + this.attacks.get(key));
                 i+=1;
             }
             int saisie;
